@@ -4,4 +4,9 @@
 
 *[fork-wait.c](fork-wait.c)
 
+*[mainsol.c](mainsol.c)
+
+*[solucion.c](solucion.c)
+
+*[solucion.h](solucion.h)
 
