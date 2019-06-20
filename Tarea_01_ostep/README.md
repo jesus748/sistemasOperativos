@@ -5,7 +5,10 @@ En este trabajo, se realizaron cambios en los archivos [mem.c](mem.c), [threads.
 
 ## mem.c
 
-slkadjflksdfjsldñfjsdlfñkjslfdñkjsadlfjñsldfjl
+Al ejecutar mem se crea un contador llamado p que ira sumando de 1 en 1 mientras se repita el bucle todo esto
+es guardado en un espacio especifico de la memoria que es mostrada al principio. Con esto al correr dos veces 
+el programa de manera concurrente se puede observar como cada valor p es guardado en una seccion diferente en 
+esa parte de la memoria.
 
 ## threads.c
 
@@ -27,4 +30,22 @@ Después que los dos hilos terminan con el ciclo for, antes de salir del main, s
 
 ## io.c
 
-aslkñdfjsdklfñjsdfklñsjdfñlksdjf
+Se desarrolla un programa que pide una entrada de texto por consola, para cargar un archivo de texto plano.
+El programa toma todos los caracteres que hay en el archivo y retorna al revés todo el contenido de dicho 
+archivo. 
+
+Con el uso de FILE se intenta cargar el archivo con el nombre indicado, de no poder cargarse se envia un 
+mensaje negativo. 
+
+Si se puede cargar, el contenido del archivo se guarda en la variable file para poder acceder de forma 
+individual a cada uno de los caracteres incluidos en él. 
+
+Mediante la función fseek() nos paramos en la parte final del archivo, en cada iteración con la función 
+ftell() verificamos en que punto del archivo nos encontramos, cuando se llegue al inicio de este, paramos. 
+
+Al estar ubicados al final del archivo, en cada iteración del ciclo, retornamos el caracter que se encuentra 
+en dicha posición y luego nos ubicamos en la posición anterior a la cual acabamos de retornar, repetimos estos
+pasos devolviendonos y retorando cada uno de los caracteres contenidos en el archivo desde la parte final, al
+inico de este.
+
+Cuando se termina de recorrer el archivo, en la pantalla se muestra el contenido de este totalmente al revés.
