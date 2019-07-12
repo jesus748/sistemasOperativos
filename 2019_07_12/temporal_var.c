@@ -2,16 +2,17 @@
 
 int a;
 
-int sum(int x, int y){
+int sum(int *x, int y){
 	int z;
-	z=x+y;
-	a=a+6;
+	*x=*x+y;
+	z=*x;
 	return z;
 }
 
 int main (int argc, char** argv){
+	int x1=4,y1=5;
 	a=4;
-	printf("suma: %d\n", sum(4,5));
-	printf("A: %d\n",a);
+	printf("suma: %d\n", sum(&x1,y1));
+	printf("x = %d\n", x1);
 	return 0;
 }
