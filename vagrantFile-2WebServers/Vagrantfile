@@ -1,0 +1,31 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "web_1" do |web_1|
+      web_1.vm.box = "ubuntu/xenial64"
+
+   
+    config.vm.network "forwarded_port", guest: 80, host: 8080
+    config.vm.provision "shell", path: "script.sh"
+    config.vm.synced_folder "./www_1", "/var/www/html"
+  end
+
+
+
+
+
+  config.vm.define "web_2" do |web_2|
+      web_2.vm.box = "ubuntu/xenial64"
+
+     
+    config.vm.network "forwarded_port", guest: 81, host: 8008
+    config.vm.provision "shell", path: "script.sh"
+    config.vm.synced_folder "./www_2", "/var/www/html"
+
+  end
+
+
+
+end
+
