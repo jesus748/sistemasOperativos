@@ -1,6 +1,38 @@
 #!/usr/bin/env bash
 apt-get update
 apt-get install -y haproxy
+echo -e "ENABLED=1" >> /etc/default/haproxy
 mv /etc/haproxy/haproxy.cfg{,.original}
-echo "global \n\tlog /dev/log   local0 \n\tlog 127.0.0.1   local1 notice \n\tmaxconn 4096 \n\tuser haproxy \n\tgroup haproxy \n\tdaemon \ndefaults \n\tlog     global \n\tmode    http \n\toption  httplog \n\toption  dontlognull \n\tretries 3 \n\toption redispatch \n\tmaxconn 2000 \n\tcontimeout     5000 \n\tclitimeout     50000 \n\tsrvtimeout     50000 \nlisten webfarm \n\tbind 0.0.0.0:80 \n\tmode http \n\tstats enable \n\tstats uri /haproxy?stats \n\tbalance roundrobin \n\toption httpclose \n\toption forwardfor \n\tserver webserver01 192.168.205.16:80 check \n\tserver webserver02 192.168.205.17:80 check" >> /etc/haproxy/haproxy.cfg
-sudo service haproxy start
+
+# configuració HAproxy
+
+echo -e "global" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tlog /dev/log local0" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tlog 127.0.0.1 local1 notice" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tmaxconn 4096" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tuser haproxy" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tgroup haproxy" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tdaemon" >> /etc/default/haproxy/haproxy.cfg
+echo -e "defaults" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tlog global" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tmode http" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\toption httplog" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\toption dontlognull" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tretries 3" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\toption redispatch" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tmaxconn 2000" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tcontimeout 5000" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tclitimeout 50000" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tsrvtimeout 50000" >> /etc/default/haproxy/haproxy.cfg
+echo -e "listen webfarm" >> /etc/default/haproxy/haproxy.cfg
+echo -e "blind 0.0.0.0:80" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tmode http" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tstats enable" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tstats uri /haproxy?stats" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tbalance roundrobin" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\toption httpclose" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\toption forwardfor" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tserver web01 192.168.200.3:80 check" >> /etc/default/haproxy/haproxy.cfg
+echo -e "\tserver web02 192.168.200.4:80 check" >> /etc/default/haproxy/haproxy.cfg
+service haproxy start
+service haproxy restart
