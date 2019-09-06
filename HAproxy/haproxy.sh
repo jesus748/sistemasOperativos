@@ -25,7 +25,7 @@ echo -e "\tcontimeout 5000" >> /etc/haproxy/haproxy.cfg
 echo -e "\tclitimeout 50000" >> /etc/haproxy/haproxy.cfg
 echo -e "\tsrvtimeout 50000" >> /etc/haproxy/haproxy.cfg
 echo -e "listen webfarm" >> /etc/haproxy/haproxy.cfg
-echo -e "blind 0.0.0.0:80" >> /etc/haproxy/haproxy.cfg
+echo -e "bind 0.0.0.0:80" >> /etc/haproxy/haproxy.cfg
 echo -e "\tmode http" >> /etc/haproxy/haproxy.cfg
 echo -e "\tstats enable" >> /etc/haproxy/haproxy.cfg
 echo -e "\tstats uri /haproxy?stats" >> /etc/haproxy/haproxy.cfg
@@ -36,3 +36,4 @@ echo -e "\tserver web01 172.19.0.3:80 check" >> /etc/haproxy/haproxy.cfg
 echo -e "\tserver web02 172.19.0.4:80 check" >> /etc/haproxy/haproxy.cfg
 
 sudo service haproxy start
+sudo service haproxy restart
